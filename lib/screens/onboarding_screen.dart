@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:justduit/screens/form_login.dart';
+import 'package:justduit/screens/form_screen.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -35,7 +37,6 @@ class OnboardingScreen extends StatelessWidget {
                         child: Text(
                           "Let’s start the journey",
                           style: TextStyle(
-                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
                             height: 1.5,
@@ -49,7 +50,6 @@ class OnboardingScreen extends StatelessWidget {
                             "Experience seamless digital transactions with JustDuit",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontFamily: 'Poppins',
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
                               height: 1.5,
@@ -63,7 +63,13 @@ class OnboardingScreen extends StatelessWidget {
                         width: 294,
                         height: 52,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context, MaterialPageRoute(
+                                builder: (context)=> FormScreen()
+                                ),
+                              );
+                          },
                           style: ElevatedButton.styleFrom(
                             primary: const Color(0xFF1E90FF),
                             shape: RoundedRectangleBorder(
@@ -73,7 +79,6 @@ class OnboardingScreen extends StatelessWidget {
                           child: Text(
                             "Get Started",
                             style: TextStyle(
-                              fontFamily: 'Poppins',
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
                               color: Colors.white,
@@ -81,22 +86,42 @@ class OnboardingScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                                            
-                      SizedBox(height: 4), 
-                      Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16), // Mengubah padding atas
-                        child: Text(
-                          "I already have an account",
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
+
+                      Center(
+                    child: TextButton(
+                      onPressed: () {
+                            Navigator.push(
+                              context, MaterialPageRoute(
+                                builder: (context)=> FormLogin()
+                                ),
+                              );
+                      },
+                      child: Text(
+                        "I already have an account",
+                        style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
                             height: 1.5,
                             color: const Color(0xFFA4A8AE),
                           ),
                         ),
-                      ),
+                    ),
+                  ),
+                                            
+                      // SizedBox(height: 4), 
+                      // Container(
+                      //   alignment: Alignment.center,
+                      //   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16), // Mengubah padding atas
+                      //   child: Text(
+                      //     "I already have an account",
+                      //     style: TextStyle(
+                      //       fontWeight: FontWeight.w400,
+                      //       fontSize: 14,
+                      //       height: 1.5,
+                      //       color: const Color(0xFFA4A8AE),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
