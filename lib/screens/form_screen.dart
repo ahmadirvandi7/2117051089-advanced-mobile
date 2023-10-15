@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:justduit/screens/form_login.dart';
+import 'package:justduit/screens/home_screen.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({super.key});
@@ -23,7 +24,7 @@ class _FormScreenState extends State<FormScreen> {
           
           children: [
             Image.asset("assets/images/image1.png"),
-            SizedBox(height: 16), // Add spacing between the image and the text
+            SizedBox(height: 16), 
             Text(
               "Sign Up Now and Unlock the Power of Justduit",
               style: GoogleFonts.poppins(
@@ -173,6 +174,14 @@ class _FormScreenState extends State<FormScreen> {
                       onPressed: () {
                         setState(() {
                           isEmailValid = emailController.text.isNotEmpty;
+                          if (isEmailValid) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeScreen()
+                                )
+                            );
+                          }
                         });
                       },
                       style: ElevatedButton.styleFrom(

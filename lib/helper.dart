@@ -37,17 +37,17 @@
 // // }
 
 
-import 'dart:io';
+// import 'dart:io';
 
-late String? nama;
+// late String? nama;
 
-void main() {
-  List angka = [1, 2, 3, 4, 5];
-  printList(angka);
-}
+// void main() {
+//   List angka = [1, 2, 3, 4, 5];
+//   printList(angka);
+// }
 
-void printList(List l) {
-  for (var i = 0; i < l.length; i++) {
-    print(l[i]);
-  }
-}
+// void printList(List l) {
+//   for (var i = 0; i < l.length; i++) {
+//     print(l[i]);
+//   }
+// }
