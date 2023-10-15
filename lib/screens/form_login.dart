@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:justduit/screens/home_screen.dart';
 
 class FormLogin extends StatefulWidget {
   const FormLogin({super.key});
@@ -121,6 +122,14 @@ class _FormLoginState extends State<FormLogin> {
                       onPressed: () {
                         setState(() {
                           isEmailValid = emailController.text.isNotEmpty;
+                          if (isEmailValid) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeScreen()
+                                )
+                            );
+                          }
                         });
                       },
                       style: ElevatedButton.styleFrom(
