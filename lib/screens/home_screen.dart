@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,15 +11,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-   var fitur = [
-    "Request",
+  var fitur = [
+    "Top Up",
     "Send",
-    "Bills",
-    "Pay",
     "Withdraw",
+    "Pay",
     "Games",
-    "Split",
-    "Mobile",
+    "Water",
+    "Withdraw",
+    "Pay",
   ];
 
   var fiturIcons = [
@@ -29,152 +32,166 @@ class _HomeScreenState extends State<HomeScreen> {
     Icons.splitscreen,
     Icons.phone_android,
   ];
+
   var news = [
     'Get your greens for less',
     'Level up your gaming experience',
   ];
+  
   var descriptionNews = [
     'Enjoy exclusive discounts at Ranch Market, your go-to veggie supermarket',
     'Get exciting cashback offers on topping up your game balance',
   ];
+
   var imagesNews = [
     'assets/images/sayur.png',
     'assets/images/gaming.png',
   ];
 
+  var name = '';
+  void getName() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      name = prefs.getString('name') ?? "User";
+      print(name);
+    });
+  }
 
   @override
+  void initState() {
+    super.initState();
+    getName();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF6F8FB),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundImage: AssetImage('assets/images/fotopp.jpeg'),
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Hai, ',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xffA4A8AE),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          'Shanon',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16),
-                width: double.infinity,
-                height: 166,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        child: RefreshIndicator(
+          onRefresh: () {
+            return Future.delayed(
+              Duration(seconds: 3),
+            );
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
                     children: [
-                      Text(
-                        'Platinum Member',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(
+                          'https://avatars.githubusercontent.com/u/92698735?s=400&u=12c657893578710bb7068183ba4e3cf3c833b467&v=4',
                         ),
+                        radius: 20,
                       ),
-                      Text(
-                        'Member Since 08/23',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Text(
-                        'Balance',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Text(
-                        'Rp.4.000.000',
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Hai, ',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Color(0xffA4A8AE),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            '$name',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              GridView.builder(
-                itemCount: fitur.length,
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 16,
-                ),
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(top: 8),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 16),
+                  width: double.infinity,
+                  height: 166,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          width: 65,
-                          height: 65,
-                          decoration: BoxDecoration(
+                        Text(
+                          'Platinum Member',
+                          style: TextStyle(
+                            fontSize: 14,
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
+                            fontWeight: FontWeight.w600,
                           ),
-                          child: Flexible(
+                        ),
+                        Text(
+                          'Member Since 08/23',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        SizedBox(height: 40),
+                        Text(
+                          'Balance',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          'Rp.4.000.000',
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                GridView.builder(
+                  itemCount: fitur.length,
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 12,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.only(top: 2),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
                             child: Icon(
                               fiturIcons[index],
                               color: Colors.black,
                               size: 32,
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Flexible(
-                          child: Text(
+                          SizedBox(height: 8),
+                          Text(
                             fitur[index],
                             style: TextStyle(
                               fontSize: 14,
@@ -182,67 +199,63 @@ class _HomeScreenState extends State<HomeScreen> {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, left: 20),
-                child: Row(
-                  children: [
-                    Text(
-                      'Promo',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
+                        ],
                       ),
-                    ),
-                    SizedBox(width: 245),
-                    Text(
-                      'See all',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              ),
-              ListView.builder(
-                itemCount: news.length,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.all(16),
-                    width: double.infinity,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(16.0),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(imagesNews[index]),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: AlignmentDirectional.center,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(top: 14, left: 20, right: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Promo',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Expanded(
+                      ),
+                      Spacer(),
+                      Text(
+                        'See all',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ListView.builder(
+                  itemCount: news.length,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.all(8),
+                      width: double.infinity,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(16.0),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(imagesNews[index]),
+                        ),
+                      ),
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,13 +279,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ],
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

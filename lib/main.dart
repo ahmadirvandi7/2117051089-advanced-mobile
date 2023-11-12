@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:justduit/screens/form_screen.dart';
-import 'package:justduit/screens/home_screen.dart';
-import 'package:justduit/screens/onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +8,7 @@ void main() {
 // This widget is the root of your application
 //widget ada 2 -> stateless dan state full
 class MyApp extends StatelessWidget {
-  const MyApp({super.key}); 
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,7 +19,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: const OnboardingScreen(),
+      home: const FormScreen(),
+      // initialRoute: AppPages.INITIAL,
+      // getPages: AppPages.routes,
     );
   }
 }
